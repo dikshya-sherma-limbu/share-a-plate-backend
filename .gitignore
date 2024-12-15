@@ -1,0 +1,56 @@
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.vspscc
+*.vssscc
+.vscode/
+.vs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+*.tlog
+
+
+# Visual Studio working files
+*.suo
+*.cache
+*.pdb
+*.ilk
+*.idb
+*.opendb
+*.VC.db
+
+# Configuration files
+appsettings.Development.json
+*.secret.json
+*.config
+*.conf 
+*.appsettings.json
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Deployment
+.publish/
+
+# Git metadata
+.git/
+
+# GitHub Copilot-specific files
+*.copilot
+
+
+
+# Ignore build artifacts
+share-a-plate-backend/bin/
+share-a-plate-backend/obj/

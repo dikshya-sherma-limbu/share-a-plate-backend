@@ -1,0 +1,6 @@
+@share_a_plate_backend_HostAddress = http://localhost:5128
+
+GET {{share_a_plate_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
