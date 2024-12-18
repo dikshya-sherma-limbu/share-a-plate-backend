@@ -33,7 +33,11 @@ appsettings.Development.json
 *.secret.json
 *.config
 *.conf 
-*.appsettings.json
+
+# Ignore appsettings files
+appsettings.json
+appsettings*.json
+
 
 # Temporary files
 *.tmp
