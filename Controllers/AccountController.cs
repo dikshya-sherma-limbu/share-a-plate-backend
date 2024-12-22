@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using share_a_plate_backend.DTOs;
 using share_a_plate_backend.Interfaces;
@@ -42,6 +43,9 @@ namespace share_a_plate_backend.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        
+        
 
     }
 }
