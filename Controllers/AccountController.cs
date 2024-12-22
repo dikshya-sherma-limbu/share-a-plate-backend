@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using share_a_plate_backend.DTOs;
+using share_a_plate_backend.Interfaces;
 
 namespace share_a_plate_backend.Controllers
 {
@@ -6,17 +9,39 @@ namespace share_a_plate_backend.Controllers
     [ApiController]
     public class AccountController : Controller
     {
-        public IActionResult Index()
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
+
+        public AccountController(IUserService userService, IMapper mapper)
         {
-            return View();
+            // constructor for account controller
+            _userService = userService;
+
+            // inject mapper into controller 
+            _mapper = mapper;
         }
+
 
         // POST: api/Account/Login
         [HttpPost("Login")]
-        public IActionResult Login()
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
+            System.Console.WriteLine("Login");
+            try
+            {
+                var user = await _userService.Login(loginDto);
+                if (user == null)
+                {
+                    return Unauthorized("Invalid credentials.");
+                }
 
-            return Ok();
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
     }
 }
