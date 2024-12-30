@@ -10,7 +10,9 @@ namespace share_a_plate_backend.AutoMapper
         {
             // mapping from LoginDto to User
             CreateMap<LoginDto, User>();
-                
+            // mapping from RegisterDto to User
+            CreateMap<RegisterDto, User>();
+
         }
     }
 }

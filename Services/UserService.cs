@@ -42,19 +42,35 @@ namespace share_a_plate_backend.Services
 
 
         }
+        // Implement the Register method to register a new user
+        public async Task<User>  Register(RegisterDto registerDto)
+        {
+            
+            // check if the user is already registered
+            bool userExist = await  _userRepository.GetUserByEmail(registerDto.Email);
+            if(userExist.Equals(true))
+            {
+                throw new UnauthorizedAccessException("User already exists.");
+            }
+            else
+            {
+                // map the DTO to the model
+                var userToRegister = _mapper.Map<User>(registerDto);
+                // register the user
+                var registeredUser = await _userRepository.Register(userToRegister);
+                return registeredUser;
+            }
+
+
+            throw new NotImplementedException();
+        }
 
         public Task<User> Logout(string email)
         {
             throw new NotImplementedException();
         }
 
-      
 
-        public Task<User> Register(User user, string password)
-        {
-            throw new NotImplementedException();
-        }
-
-   
+       
     }
 }

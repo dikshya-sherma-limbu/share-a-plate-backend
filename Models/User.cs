@@ -19,7 +19,7 @@ namespace share_a_plate_backend.Models
         [EmailAddress]
         public string Email { get; set; }
 
-        [StringLength(8)]
+        [MinLength(8)]
         public string Password { get; set; }
         [Required]
         public string Location { get; set; }
@@ -41,9 +41,10 @@ namespace share_a_plate_backend.Models
             OrganizationDonations = new HashSet<OrganizationDonation>();
         }
 
+        
 
         // Constructor with parameters
-        public User(string userFirstName, string userLastName, string email, string password, string location, int number) : this()
+        public User(string userFirstName, string userLastName, string email, string password, string location, long number) : this()
         {
             UserFirstName = userFirstName;
             UserLastName = userLastName;

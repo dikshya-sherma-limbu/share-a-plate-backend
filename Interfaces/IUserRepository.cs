@@ -6,8 +6,10 @@ namespace share_a_plate_backend.Interfaces
     {
         // interface for user repository
         Task<User> Login(string email, string password);
-        Task<User> Register(User user, string password);
        
+        Task<User> Register(User user);
+
+        Task<Boolean> GetUserByEmail(string email);
         Task<User> Logout(string email);
 
     }

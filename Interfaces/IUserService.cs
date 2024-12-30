@@ -7,8 +7,7 @@ namespace share_a_plate_backend.Interfaces
     {
         // interface for user service
         Task<string> Login(LoginDto loginDto);
-        Task<User> Register(User user, string password);
-    
+       Task<User>  Register(RegisterDto registerDto);
         Task<User> Logout(string email);
        
     }
