@@ -44,8 +44,29 @@ namespace share_a_plate_backend.Controllers
             }
         }
 
-        
-        
+        // POST: api/Account/Register
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+        {
+            System.Console.WriteLine("Register");
+            try
+            {
+                var user = await _userService.Register(registerDto);
+                if (user == null)
+                {
+                    return BadRequest("User already exists.");
+                }
+                // return the registered user
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
 
     }
 }
