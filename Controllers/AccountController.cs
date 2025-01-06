@@ -6,7 +6,7 @@ using share_a_plate_backend.Interfaces;
 
 namespace share_a_plate_backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("Api/[controller]")]
     [ApiController]
     public class AccountController : Controller
     {
@@ -23,20 +23,20 @@ namespace share_a_plate_backend.Controllers
         }
 
 
-        // POST: api/Account/Login
+        // POST: api/account/login
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
             System.Console.WriteLine("Login");
             try
             {
-                var user = await _userService.Login(loginDto);
-                if (user == null)
+                var token = await _userService.Login(loginDto);
+                if (token == null)
                 {
                     return Unauthorized("Invalid credentials.");
                 }
 
-                return Ok(user);
+                return Ok(token);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace share_a_plate_backend.Controllers
             }
         }
 
-        // POST: api/Account/Register
+        // POST: api/account/Register
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {

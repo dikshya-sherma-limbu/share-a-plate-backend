@@ -45,19 +45,22 @@ builder.Services.AddHttpContextAccessor();
 // add JWT authentication via extension method
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
-/* Configure CORS if needed (optional)
+// add CORS policy to allow requests from the frontend
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
         builder =>
         {
-            builder.WithOrigins("http://your-frontend-domain.com") // Replace with your frontend URL
-                   .AllowAnyHeader()
-                   .AllowAnyMethod()
-                   .AllowCredentials(); // Allow cookies
+            builder.WithOrigins("http://localhost:3000")
+                   .AllowAnyHeader() // Allow any header: means the frontend can send any header
+                   .AllowAnyMethod() // Allow any method: means the frontend can send any HTTP method
+                   .AllowCredentials();// Allow cookies: means the frontend can send cookies
+                   
+
         });
-}); 
-*/
+});
+
+
 
 
 var app = builder.Build();
@@ -69,7 +72,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+// enable CORS policy
+app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
