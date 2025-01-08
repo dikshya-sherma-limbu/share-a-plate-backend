@@ -13,6 +13,12 @@ namespace share_a_plate_backend.AutoMapper
             // mapping from RegisterDto to User
             CreateMap<RegisterDto, User>();
 
+            // mapping from IndividualDonationDto to IndividualDonation
+            CreateMap<IndividualDonationDto, IndividualDonation>();
+
+            // mapping from OrganisationDonationDto to OrganisationDonation
+            CreateMap<OrganizationDonationDto, OrganizationDonation>();
+
         }
     }
 }

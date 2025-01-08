@@ -55,7 +55,7 @@ namespace share_a_plate_backend.Services
             else
             {
                 // map the DTO to the model
-                var userToRegister = _mapper.Map<User>(registerDto);
+             var userToRegister = _mapper.Map<User>(registerDto);
                 // register the user
                 var registeredUser = await _userRepository.Register(userToRegister);
                 return registeredUser;
