@@ -11,6 +11,14 @@ namespace share_a_plate_backend.Interfaces
 
         Task<List<OrganizationDonation>> GetOrganizationDonationsRepo();
         Task<List<IndividualDonation>> GetIndividualDonationsRepo();
+        Task<List<OrganizationDonation>> GetUsersOrganizationDonationsRepo();
+        Task<List<IndividualDonation>> GetUsersIndividualDonationsRepo();
+        
+
+        // DeleteDonation method
+
+        Task DeleteIndividualDonationRepo(int donationId);
+        Task DeleteOrganizationDonationRepo(int donationId);
 
 
     }

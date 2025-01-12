@@ -23,6 +23,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// Add HttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
 // register repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IDonationRepository, DonationRepository>();
@@ -32,6 +35,9 @@ builder.Services.AddScoped<IDonationRepository, DonationRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJwtServicecs, JwtService>();
 builder.Services.AddScoped<IDonationService, DonationService>();
+
+builder.Services.AddScoped<JwtClaimDecoder>();
+
 
 // Json options for serialization and deserialization of JSON
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -69,8 +75,7 @@ builder.Services.AddSwaggerGen(c => {
 });
 
 
-// Add HttpContextAccessor
-builder.Services.AddHttpContextAccessor();
+
 
 // add JWT authentication via extension method
 builder.Services.AddJwtAuthentication(builder.Configuration);
@@ -101,26 +106,27 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
 
-// enable CORS policy
-app.UseCors("AllowFrontend");
-app.UseHttpsRedirection();
-app.UseDeveloperExceptionPage();
 
-// This add the Authentication Middleware
-app.UseAuthentication();
-app.UseAuthorization();
-
-// This will add the ProblemDetails middleware to the pipeline so that it can handle exceptions
-// and return the appropriate response
-app.UseExceptionHandler();
-app.UseStatusCodePages();
-
-if (app.Environment.IsDevelopment())
-{
+    // enable CORS policy
+    app.UseCors("AllowFrontend");
+    app.UseHttpsRedirection();
     app.UseDeveloperExceptionPage();
-}
-app.MapControllers();
 
-app.Run();
+    // This add the Authentication Middleware
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    // This will add the ProblemDetails middleware to the pipeline so that it can handle exceptions
+    // and return the appropriate response
+    app.UseExceptionHandler();
+    app.UseStatusCodePages();
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+    app.MapControllers();
+
+    app.Run();
+}
